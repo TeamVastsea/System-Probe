@@ -10,7 +10,7 @@ pub async fn fire(data: MachineInfo) {
     let mut trys = 0;
     let mut clients = loop {
         if trys > 100 {
-            panic!("Cannot get clients");
+            return;
         }
         trys += 1;
 
