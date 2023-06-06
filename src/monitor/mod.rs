@@ -1,7 +1,6 @@
 pub mod refresh;
 mod query;
 
-use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
 use crate::monitor::query::query;
 

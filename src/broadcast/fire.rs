@@ -1,6 +1,6 @@
 use std::ops::{DerefMut};
-use simple_log::{info, warn};
-use tungstenite::{Message, WebSocket};
+use simple_log::{debug, info, warn};
+use tungstenite::{Message};
 use crate::broadcast::{CLIENTS};
 use crate::monitor::MachineInfo;
 
@@ -22,15 +22,15 @@ pub async fn fire(data: MachineInfo) {
     for client_info in clients.deref_mut() {
         let (ip, client) = client_info.as_mut().unwrap();
         match client.write_message(Message::Text(data_str.clone())) {
-            Ok(_) => {},
+            Ok(_) => {}
             Err(_) => {
                 warn!("Removing client: {}.", ip);
                 *client_info = None;
             }
         };
     }
-    clients.retain(|x| x.is_some());
     if clients.len() > 0 {
-        info!("Send to {} clients.", clients.len());
+        clients.retain(|x| x.is_some());
+        debug!("Send to {} clients.", clients.len());
     }
 }
