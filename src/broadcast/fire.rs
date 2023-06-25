@@ -1,5 +1,5 @@
 use std::ops::{DerefMut};
-use simple_log::{debug, info, warn};
+use simple_log::{debug, warn};
 use tungstenite::{Message};
 use crate::broadcast::{CLIENTS};
 use crate::monitor::MachineInfo;
